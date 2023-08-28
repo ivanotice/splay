@@ -1,5 +1,4 @@
-
-    // Obtener referencias a los elementos del DOM
+// Obtener referencias a los elementos del DOM
 const moviesContainer = document.getElementById('movies-container');
 const searchCount = document.getElementById('search-count');
 const yearFilter = document.getElementById('year-filter');
@@ -20,11 +19,12 @@ function searchMovies() {
     const movie = movies[i];
     const year = movie.getAttribute('data-year');
     const categories = movie.getAttribute('data-category').split(' ');
+    const type = movie.getElementsByClassName('category-tag')[0].textContent.toLowerCase();
 
     // Comprobar si la película cumple con los filtros seleccionados
     const yearMatch = yearValue === 'all' || year === yearValue;
-    const categoryMatch = categoryValue === 'all' || categories.includes(categoryValue);
-    const typeMatch = typeValue === 'all' || typeValue === 'peliculas';
+    const categoryMatch = categoryValue === 'all' || categories.includes(categoryValue.toLowerCase());
+    const typeMatch = typeValue === 'all' || typeValue.toLowerCase() === type;
 
     // Mostrar u ocultar la película según los resultados de la búsqueda
     if (yearMatch && categoryMatch && typeMatch) {
@@ -46,4 +46,3 @@ typeFilter.addEventListener('change', searchMovies);
 
 // Realizar la búsqueda inicialmente para mostrar todos los resultados
 searchMovies();
-    
